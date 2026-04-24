@@ -30,7 +30,7 @@ const LeadModal = () => {
           ✕
         </button>
 
-        <div className="overflow-y-auto max-h-[90vh] p-8 md:p-12">
+        <div className="overflow-y-auto max-h-[90vh] p-8 md:p-12 no-scrollbar">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-heading font-bold text-slate-900 mb-2">Get a Free Quote</h2>
             <p className="text-slate-500">Fill out the form below and our experts will contact you within 24 hours.</p>

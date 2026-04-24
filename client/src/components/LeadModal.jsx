@@ -4,7 +4,7 @@ const LeadModal = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    
+    // Check if modal has already been shown in this session
     const hasShown = sessionStorage.getItem('leadModalShown');
     
     if (!hasShown) {
@@ -17,59 +17,63 @@ const LeadModal = () => {
     }
   }, []);
 
+  // Listen for manual trigger event
+  useEffect(() => {
+    const handleOpen = () => setIsVisible(true);
+    window.addEventListener('openLeadModal', handleOpen);
+    return () => window.removeEventListener('openLeadModal', handleOpen);
+  }, []);
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-md max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-[2px] animate-in fade-in duration-300">
+      <div className="relative w-full max-w-sm bg-white rounded-[2rem] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
         {/* Close Button */}
         <button 
           onClick={() => setIsVisible(false)}
-          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors z-20"
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors z-20"
         >
           ✕
         </button>
 
-        <div className="overflow-y-auto max-h-[90vh] p-8 md:p-12 no-scrollbar">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-heading font-bold text-slate-900 mb-2">Get a Free Quote</h2>
-            <p className="text-slate-500">Fill out the form below and our experts will contact you within 24 hours.</p>
+        <div className="p-6 md:p-8 no-scrollbar">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-heading font-bold text-slate-900 mb-1">Get a Free Quote</h2>
+            <p className="text-sm text-slate-500">Fill out the form and we'll call you back.</p>
           </div>
 
-          <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); setIsVisible(false); alert('Thank you! We will get back to you soon.'); }}>
+          <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setIsVisible(false); alert('Thank you! We will get back to you soon.'); }}>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider px-2">Full Name</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2">Full Name</label>
               <input 
                 type="text" 
                 required
-                placeholder="John Doe" 
-                className="w-full px-6 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all"
+                placeholder="Name" 
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-sm"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider px-2">Phone Number</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2">Phone Number</label>
               <input 
                 type="tel" 
                 required
-                placeholder="+91 98765 43210" 
-                className="w-full px-6 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all"
+                placeholder="+91 7976458341" 
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-sm"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider px-2">Service Needed</label>
-              <select className="w-full px-6 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2">Service</label>
+              <select className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all appearance-none text-sm">
                 <option>Residential Solar</option>
                 <option>Commercial Solar</option>
-                <option>Solar Maintenance</option>
+                <option>Maintenance</option>
               </select>
             </div>
 
-            <button className="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-xl active:scale-[0.98] mt-4">
-              Get Started Now
+            <button className="w-full bg-slate-900 text-white py-3.5 rounded-xl font-bold text-base hover:bg-slate-800 transition-all shadow-lg active:scale-[0.98] mt-2">
+              Get Started
             </button>
-            <p className="text-center text-xs text-slate-400 mt-4">
-              By clicking, you agree to our privacy policy and terms.
-            </p>
           </form>
         </div>
       </div>

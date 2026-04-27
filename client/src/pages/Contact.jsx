@@ -1,7 +1,32 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { baseURL } from '../common/SummerAPI';
+
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: 'General Inquiry',
+    message: ''
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await axios.post(`${baseURL}/api/inquiries`, formData);
+      alert('Message sent successfully! We will get back to you soon.');
+      setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
+    } catch (err) {
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
-      {/* Header */}
       <section className="bg-slate-900 py-20 text-center">
         <h1 className="text-5xl font-heading font-extrabold text-white mb-4">Contact Us</h1>
         <p className="text-xl text-slate-400 max-w-2xl mx-auto">
@@ -9,10 +34,8 @@ const Contact = () => {
         </p>
       </section>
 
-      {/* Contact Content */}
       <section className="py-24 container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-16">
-          {/* Left Side: Contact Info */}
           <div className="lg:w-1/3 space-y-10">
             <div>
               <h2 className="text-3xl font-heading font-bold text-slate-900 mb-6">Get in Touch</h2>
@@ -40,14 +63,16 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
           <div className="lg:w-2/3 bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-2xl">
-            <form className="space-y-8">
+            <form className="space-y-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-500 uppercase tracking-wider px-2">Full Name</label>
                   <input 
                     type="text" 
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="John Doe" 
                     className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all"
                   />
@@ -56,6 +81,9 @@ const Contact = () => {
                   <label className="text-sm font-bold text-slate-500 uppercase tracking-wider px-2">Email Address</label>
                   <input 
                     type="email" 
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="john@example.com" 
                     className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all"
                   />
@@ -64,7 +92,11 @@ const Contact = () => {
               
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase tracking-wider px-2">Subject</label>
-                <select className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all appearance-none">
+                <select 
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all appearance-none"
+                >
                   <option>General Inquiry</option>
                   <option>Residential Installation</option>
                   <option>Commercial Solutions</option>
@@ -76,13 +108,19 @@ const Contact = () => {
                 <label className="text-sm font-bold text-slate-500 uppercase tracking-wider px-2">Message</label>
                 <textarea 
                   rows="5" 
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="How can we help you?" 
                   className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary outline-none transition-all resize-none"
                 ></textarea>
               </div>
 
-              <button className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-xl active:scale-[0.98]">
-                Send Message
+              <button 
+                disabled={loading}
+                className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-xl active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -93,3 +131,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

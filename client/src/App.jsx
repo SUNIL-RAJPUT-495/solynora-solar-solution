@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LeadModal from './components/LeadModal';
@@ -13,15 +13,27 @@ import TermsOfService from './pages/TermsOfService';
 import CookiePolicy from './pages/CookiePolicy';
 import FAQ from './pages/FAQ';
 import Blog from './pages/Blog';
+
+// Admin Pages
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminLeads from './pages/admin/AdminLeads';
+import AdminInquiries from './pages/admin/AdminInquiries';
+import AdminBlogs from './pages/admin/AdminBlogs';
+
 function App() {
+  const location = useLocation();
+  const isAdminPath = location.pathname.startsWith('/admin');
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <Navbar />
-      <LeadModal />
+      {!isAdminPath && <Navbar />}
+      {!isAdminPath && <LeadModal />}
       
       {/* Page Content */}
       <main className="flex-grow">
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
@@ -33,10 +45,17 @@ function App() {
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/leads" element={<AdminLeads />} />
+          <Route path="/admin/inquiries" element={<AdminInquiries />} />
+          <Route path="/admin/blogs" element={<AdminBlogs />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isAdminPath && <Footer />}
     </div>
   );
 }

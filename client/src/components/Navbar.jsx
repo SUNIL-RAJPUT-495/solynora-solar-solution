@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar bar */}
-      <nav className="fixed top-0 left-0 right-0 z-[200] glass px-6 py-4 flex justify-between items-center shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-[200] bg-white px-6 py-4 flex justify-between items-center shadow-sm">
         {/* Logo */}
         <Link to="/" onClick={closeMenu} className="flex items-center hover:opacity-80 transition-opacity">
           <img src={logo} alt="Solynora Logo" className="h-11 w-auto object-contain" />

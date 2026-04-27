@@ -16,6 +16,11 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials", error: true, success: false });
         }
 
+        if (!process.env.JWT_SECRET) {
+            console.error("JWT_SECRET is missing in environment variables");
+            return res.status(500).json({ message: "JWT_SECRET is missing", error: true, success: false });
+        }
+
         const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         res.cookie('admin_token', token, {
@@ -31,6 +36,7 @@ export const login = async (req, res) => {
             error: false
         });
     } catch (err) {
+        console.error("Login error:", err);
         res.status(500).json({ message: err.message, error: true, success: false });
     }
 };
@@ -45,5 +51,5 @@ export const getMe = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-    res.clearCookie('token').json({ message: "Logged out successfully", success: true, error: false });
+    res.clearCookie('admin_token').json({ message: "Logged out successfully", success: true, error: false });
 };

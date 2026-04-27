@@ -14,14 +14,11 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = ["http://localhost:5173", "https://solynora-solar-solution.vercel.app"];
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-      callback(null, true);
-    } else {
-      callback(null, true); // Allow all for now to fix the user's issue, or keep it strict if preferred
-    }
-  },
+  origin: [
+    "http://localhost:5173", 
+    "https://solynora-solar-solution.vercel.app",
+    "https://solynora-solar-solution-jidi.vercel.app"
+  ],
   credentials: true
 }));
 app.use(morgan('dev'));

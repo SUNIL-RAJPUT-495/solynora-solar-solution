@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { baseURL } from '../../common/SummerAPI';
 import { Users, Search, Filter, Trash2, ExternalLink, ChevronRight, Phone } from 'lucide-react';
 
 const AdminLeads = () => {
@@ -15,7 +14,7 @@ const AdminLeads = () => {
 
     const fetchLeads = async () => {
         try {
-            const response = await axios.get(`${baseURL}/api/leads`, { withCredentials: true });
+            const response = await AxiosAdmin.get(`/api/leads`);
             setLeads(response.data.leads);
         } catch (err) {
             console.error("Error fetching leads:", err);
@@ -26,7 +25,7 @@ const AdminLeads = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await axios.put(`${baseURL}/api/leads/${id}`, { status: newStatus }, { withCredentials: true });
+            await AxiosAdmin.put(`/api/leads/${id}`, { status: newStatus });
             fetchLeads();
         } catch (err) {
             console.error("Error updating status:", err);
@@ -36,7 +35,7 @@ const AdminLeads = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this lead?")) return;
         try {
-            await axios.delete(`${baseURL}/api/leads/${id}`, { withCredentials: true });
+            await AxiosAdmin.delete(`/api/leads/${id}`);
             fetchLeads();
         } catch (err) {
             console.error("Error deleting lead:", err);

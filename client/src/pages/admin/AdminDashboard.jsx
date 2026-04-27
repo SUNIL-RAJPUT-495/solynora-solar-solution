@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { baseURL } from '../../common/SummerAPI';
 import { 
     Users, 
     MessageSquare, 
@@ -21,7 +20,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await axios.get(`${baseURL}/api/dashboard/stats`, { withCredentials: true });
+                const response = await AxiosAdmin.get(`/api/dashboard/stats`);
                 setStats(response.data.stats);
                 setRecentLeads(response.data.recentLeads);
                 setRecentInquiries(response.data.recentInquiries);

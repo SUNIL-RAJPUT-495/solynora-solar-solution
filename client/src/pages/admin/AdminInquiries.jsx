@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { baseURL } from '../../common/SummerAPI';
 import { MessageSquare, Mail, Search, Trash2, Eye, CheckCircle, Clock, Filter, ArrowRight, User, Hash } from 'lucide-react';
 
 const AdminInquiries = () => {
@@ -17,7 +16,7 @@ const AdminInquiries = () => {
 
     const fetchInquiries = async () => {
         try {
-            const response = await axios.get(`${baseURL}/api/inquiries`, { withCredentials: true });
+            const response = await AxiosAdmin.get(`/api/inquiries`);
             setInquiries(response.data.inquiries);
         } catch (err) {
             console.error("Error fetching inquiries:", err);
@@ -28,7 +27,7 @@ const AdminInquiries = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await axios.put(`${baseURL}/api/inquiries/${id}`, { status: newStatus }, { withCredentials: true });
+            await AxiosAdmin.put(`/api/inquiries/${id}`, { status: newStatus });
             fetchInquiries();
             if (selectedInquiry?._id === id) setSelectedInquiry({ ...selectedInquiry, status: newStatus });
         } catch (err) {
@@ -39,7 +38,7 @@ const AdminInquiries = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this inquiry?")) return;
         try {
-            await axios.delete(`${baseURL}/api/inquiries/${id}`, { withCredentials: true });
+            await AxiosAdmin.delete(`/api/inquiries/${id}`);
             fetchInquiries();
             setSelectedInquiry(null);
         } catch (err) {

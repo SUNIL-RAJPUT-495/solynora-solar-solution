@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { baseURL } from '../../common/SummerAPI';
 import { FileText, Plus, Search, Trash2, Edit, X, Image as ImageIcon, Loader2 } from 'lucide-react';
 
 const AdminBlogs = () => {
@@ -18,7 +17,7 @@ const AdminBlogs = () => {
 
     const fetchBlogs = async () => {
         try {
-            const response = await axios.get(`${baseURL}/api/blogs`, { withCredentials: true });
+            const response = await AxiosAdmin.get(`/api/blogs`);
             setBlogs(response.data.blogs);
         } catch (err) {
             console.error(err);
@@ -43,9 +42,9 @@ const AdminBlogs = () => {
         setSubmitting(true);
         try {
             if (editingBlog) {
-                await axios.put(`${baseURL}/api/blogs/${editingBlog._id}`, formData, { withCredentials: true });
+                await AxiosAdmin.put(`/api/blogs/${editingBlog._id}`, formData);
             } else {
-                await axios.post(`${baseURL}/api/blogs`, formData, { withCredentials: true });
+                await AxiosAdmin.post(`/api/blogs`, formData);
             }
             setIsModalOpen(false);
             setEditingBlog(null);
@@ -61,7 +60,7 @@ const AdminBlogs = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this blog post?")) return;
         try {
-            await axios.delete(`${baseURL}/api/blogs/${id}`, { withCredentials: true });
+            await AxiosAdmin.delete(`/api/blogs/${id}`);
             fetchBlogs();
         } catch (err) {
             console.error(err);

@@ -106,7 +106,14 @@ const AdminLeads = () => {
                                                     {lead.name.charAt(0)}
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="font-bold text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                        {lead.language === 'hi' ? (
+                                                            <span className="px-2 py-0.5 bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-orange-500/20">Hindi</span>
+                                                        ) : (
+                                                            <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-blue-500/20">English</span>
+                                                        )}
+                                                    </div>
                                                     <div className="flex items-center gap-2 mt-1">
                                                         <Calendar size={12} className="text-slate-600" />
                                                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
@@ -187,7 +194,12 @@ const AdminLeads = () => {
                                         {lead.name.charAt(0)}
                                     </div>
                                     <div>
-                                        <p className="font-black text-white text-xl">{lead.name}</p>
+                                        <div className="flex items-center gap-2">
+                                            <p className="font-black text-white text-xl">{lead.name}</p>
+                                            {lead.language === 'hi' && (
+                                                <span className="px-2 py-0.5 bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-orange-500/20">Hindi</span>
+                                            )}
+                                        </div>
                                         <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{new Date(lead.createdAt).toLocaleDateString()}</span>
                                     </div>
                                 </div>

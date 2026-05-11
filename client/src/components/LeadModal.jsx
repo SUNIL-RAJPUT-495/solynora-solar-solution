@@ -67,7 +67,7 @@ const LeadModal = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post(`${baseURL}/api/leads`, formData);
+      await axios.post(`${baseURL}/api/leads`, { ...formData, language });
       alert(t.successMsg);
       setIsVisible(false);
     } catch (err) {

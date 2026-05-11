@@ -131,7 +131,12 @@ const AdminDashboard = () => {
                                             {lead.name.charAt(0)}
                                         </div>
                                         <div>
-                                            <p className="font-black text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                            <div className="flex items-center gap-2">
+                                                <p className="font-black text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                {lead.language === 'hi' && (
+                                                    <span className="px-1.5 py-0.5 bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-orange-500/20">HI</span>
+                                                )}
+                                            </div>
                                             <p className="text-sm text-slate-500 font-medium line-clamp-1 italic">"{lead.message || 'No message'}"</p>
                                         </div>
                                     </div>

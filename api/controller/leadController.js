@@ -2,8 +2,8 @@ import Lead from '../models/Lead.js';
 
 export const createLead = async (req, res) => {
     try {
-        const { name, phone, message } = req.body;
-        const lead = new Lead({ name, phone, message });
+        const { name, phone, message, language } = req.body;
+        const lead = new Lead({ name, phone, message, language });
         await lead.save();
         res.status(201).json({ message: "Lead submitted successfully", lead, success: true });
     } catch (err) {

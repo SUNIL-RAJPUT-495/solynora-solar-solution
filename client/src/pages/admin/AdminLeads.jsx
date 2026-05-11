@@ -80,9 +80,9 @@ const AdminLeads = () => {
 
                 {/* Desktop Table View */}
                 <div className="hidden lg:block bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                    <div className="overflow-x-auto no-scrollbar">
-                        <table className="w-full text-left">
-                            <thead>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left min-w-[1100px] border-separate border-spacing-0">
+                            <thead className="sticky top-[73px] z-10 bg-slate-900/95 backdrop-blur-md">
                                 <tr className="bg-slate-950/40 border-b border-slate-800/50">
                                     <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Client</th>
                                     <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</th>
@@ -99,7 +99,7 @@ const AdminLeads = () => {
                                         </td>
                                     </tr>
                                 ) : filteredLeads.length > 0 ? filteredLeads.map((lead) => (
-                                    <tr key={lead._id} className="group hover:bg-white/[0.02] transition-colors">
+                                    <tr key={lead._id} className="group hover:bg-white/[0.05] bg-slate-900/40 transition-colors">
                                         <td className="px-10 py-8">
                                             <div className="flex items-center gap-5">
                                                 <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-[1.25rem] flex items-center justify-center font-black text-slate-900 shadow-lg shadow-yellow-500/10">

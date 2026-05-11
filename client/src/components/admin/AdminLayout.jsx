@@ -72,7 +72,7 @@ const AdminLayout = ({ children }) => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-grow lg:ml-72 min-h-screen">
+            <main className="flex-grow lg:ml-72 min-h-screen overflow-x-hidden">
                 {/* Top Header */}
                 <header className="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50 px-6 py-4 flex items-center justify-between lg:justify-end">
                     <button 

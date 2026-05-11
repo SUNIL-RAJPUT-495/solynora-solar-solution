@@ -80,7 +80,7 @@ const AdminLeads = () => {
 
                 {/* Desktop Table View */}
                 <div className="hidden lg:block bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto no-scrollbar">
                         <table className="w-full text-left min-w-[1100px] border-separate border-spacing-0">
                             <thead className="sticky top-[73px] z-10 bg-slate-900/95 backdrop-blur-md">
                                 <tr className="bg-slate-950/40 border-b border-slate-800/50">

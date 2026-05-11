@@ -15,7 +15,7 @@ router.post('/auth/login', login);
 router.get('/auth/me', auth, getMe);
 router.post('/auth/logout', logout);
 
-// Seed Admin (Remove or protect in production)
+// Seed Admin 
 router.post('/auth/seed', async (req, res) => {
     try {
         const adminExists = await Admin.findOne({ email: 'admin@solynora.com' });

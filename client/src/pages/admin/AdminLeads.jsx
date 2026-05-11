@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { Users, Search, Filter, Trash2, ExternalLink, ChevronRight, Phone } from 'lucide-react';
+import { Users, Search, Filter, Trash2, MessageSquare, Phone, Calendar, ChevronRight, MoreHorizontal, User } from 'lucide-react';
 
 const AdminLeads = () => {
     const [leads, setLeads] = useState([]);
@@ -45,104 +45,125 @@ const AdminLeads = () => {
     const filteredLeads = leads.filter(lead => 
         lead.name.toLowerCase().includes(search.toLowerCase()) || 
         lead.phone.includes(search) ||
-        lead.service.toLowerCase().includes(search.toLowerCase())
+        (lead.message && lead.message.toLowerCase().includes(search.toLowerCase()))
     );
 
     return (
         <AdminLayout>
-            <div className="space-y-8">
-                {/* Header */}
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-10 animate-in fade-in duration-700">
+                {/* Header Section */}
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
                     <div>
-                        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Lead Management</h1>
-                        <p className="text-sm md:text-base text-slate-400">Manage and track your solar project leads from here.</p>
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="p-2.5 bg-yellow-500/10 rounded-xl">
+                                <Users size={24} className="text-yellow-500" />
+                            </div>
+                            <span className="text-sm font-bold text-yellow-500/80 uppercase tracking-widest">Growth Tracking</span>
+                        </div>
+                        <h1 className="text-4xl font-black text-white mb-2 tracking-tight">Project Leads</h1>
+                        <p className="text-slate-400 text-lg">Track and manage potential solar installations and client requests.</p>
                     </div>
                     
-                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                        <div className="relative flex-1 sm:flex-none">
+                    <div className="flex items-center gap-4 bg-slate-900/50 backdrop-blur-md border border-slate-800 p-2 rounded-2xl w-full lg:w-auto">
+                        <div className="relative flex-grow lg:w-80">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                             <input 
                                 type="text" 
-                                placeholder="Search leads..."
+                                placeholder="Search by name, phone or message..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="bg-slate-900 border border-slate-800 rounded-2xl py-3 pl-12 pr-6 text-sm text-white focus:border-yellow-500 outline-none transition-all w-full lg:w-80"
+                                className="bg-slate-950/50 border border-slate-800 rounded-xl py-3.5 pl-12 pr-6 text-sm text-white focus:border-yellow-500/50 outline-none transition-all w-full"
                             />
                         </div>
                     </div>
                 </div>
 
-                {/* Desktop Leads Table */}
-                <div className="hidden md:block bg-slate-900 border border-slate-800 rounded-[2.5rem] overflow-hidden shadow-2xl">
-                    <div className="overflow-x-auto">
+                {/* Desktop Table View */}
+                <div className="hidden lg:block bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.5rem] overflow-hidden shadow-2xl">
+                    <div className="overflow-x-auto no-scrollbar">
                         <table className="w-full text-left">
                             <thead>
-                                <tr className="bg-slate-950/50 border-b border-slate-800">
-                                    <th className="px-8 py-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Client Name</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Service Interested</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Contact Info</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Status</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
+                                <tr className="bg-slate-950/40 border-b border-slate-800/50">
+                                    <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Client</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Contact</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Status</th>
+                                    <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-800">
+                            <tbody className="divide-y divide-slate-800/40">
                                 {loading ? (
                                     <tr>
-                                        <td colSpan="5" className="px-8 py-20 text-center">
-                                            <div className="w-10 h-10 border-4 border-yellow-500/30 border-t-yellow-500 rounded-full animate-spin mx-auto" />
+                                        <td colSpan="5" className="px-10 py-32 text-center">
+                                            <div className="w-12 h-12 border-4 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mx-auto" />
                                         </td>
                                     </tr>
                                 ) : filteredLeads.length > 0 ? filteredLeads.map((lead) => (
-                                    <tr key={lead._id} className="group hover:bg-slate-800/30 transition-colors">
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center font-bold text-yellow-500">
+                                    <tr key={lead._id} className="group hover:bg-white/[0.02] transition-colors">
+                                        <td className="px-10 py-8">
+                                            <div className="flex items-center gap-5">
+                                                <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-[1.25rem] flex items-center justify-center font-black text-slate-900 shadow-lg shadow-yellow-500/10">
                                                     {lead.name.charAt(0)}
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-white">{lead.name}</p>
-                                                    <p className="text-xs text-slate-500">{new Date(lead.createdAt).toLocaleDateString()}</p>
+                                                    <p className="font-bold text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <Calendar size={12} className="text-slate-600" />
+                                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                                                            {new Date(lead.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
-                                            <span className="text-sm text-slate-300 font-medium">{lead.service}</span>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-2 text-slate-400 hover:text-yellow-500 transition-colors cursor-pointer">
-                                                <Phone size={14} />
-                                                <span className="text-sm font-bold">{lead.phone}</span>
+                                        <td className="px-10 py-8">
+                                            <div className="max-w-xs xl:max-w-md">
+                                                <p className="text-sm text-slate-300 font-medium leading-relaxed line-clamp-2 italic">
+                                                    "{lead.message || 'No message provided'}"
+                                                </p>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
-                                            <select 
-                                                value={lead.status}
-                                                onChange={(e) => handleStatusUpdate(lead._id, e.target.value)}
-                                                className={`text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full outline-none appearance-none border transition-all cursor-pointer ${
-                                                    lead.status === 'new' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                                                    lead.status === 'contacted' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' :
-                                                    lead.status === 'converted' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                                                    'bg-slate-700/50 text-slate-400 border-slate-600'
-                                                }`}
-                                            >
-                                                <option value="new">New</option>
-                                                <option value="contacted">Contacted</option>
-                                                <option value="converted">Converted</option>
-                                                <option value="closed">Closed</option>
-                                            </select>
+                                        <td className="px-10 py-8">
+                                            <div className="flex flex-col gap-2">
+                                                <a href={`tel:${lead.phone}`} className="flex items-center gap-2.5 text-slate-400 hover:text-yellow-500 transition-colors group/link w-fit">
+                                                    <div className="p-1.5 bg-slate-800 rounded-lg group-hover/link:bg-yellow-500/10 transition-colors">
+                                                        <Phone size={14} className="group-hover/link:text-yellow-500" />
+                                                    </div>
+                                                    <span className="text-sm font-black">{lead.phone}</span>
+                                                </a>
+                                            </div>
                                         </td>
-                                        <td className="px-8 py-6 text-right">
+                                        <td className="px-10 py-8">
+                                            <div className="relative w-fit">
+                                                <select 
+                                                    value={lead.status}
+                                                    onChange={(e) => handleStatusUpdate(lead._id, e.target.value)}
+                                                    className={`text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-xl outline-none appearance-none border transition-all cursor-pointer min-w-[140px] shadow-sm ${
+                                                        lead.status === 'new' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                                                        lead.status === 'contacted' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' :
+                                                        lead.status === 'converted' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                                                        'bg-slate-800 text-slate-500 border-slate-700'
+                                                    }`}
+                                                >
+                                                    <option value="new">New Lead</option>
+                                                    <option value="contacted">Contacted</option>
+                                                    <option value="converted">Converted</option>
+                                                    <option value="closed">Closed</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td className="px-10 py-8 text-right">
                                             <button 
                                                 onClick={() => handleDelete(lead._id)}
-                                                className="p-3 text-slate-500 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                                                className="p-3 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-2xl transition-all active:scale-90"
                                             >
-                                                <Trash2 size={18} />
+                                                <Trash2 size={20} />
                                             </button>
                                         </td>
                                     </tr>
                                 )) : (
                                     <tr>
-                                        <td colSpan="5" className="px-8 py-20 text-center text-slate-500">
+                                        <td colSpan="5" className="px-10 py-32 text-center text-slate-500 font-medium">
                                             No leads found matching your search.
                                         </td>
                                     </tr>
@@ -152,72 +173,72 @@ const AdminLeads = () => {
                     </div>
                 </div>
 
-                {/* Mobile Leads Cards */}
-                <div className="md:hidden space-y-4">
+                {/* Mobile/Tablet Card View */}
+                <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
                     {loading ? (
-                        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-12 text-center">
-                            <div className="w-10 h-10 border-4 border-yellow-500/30 border-t-yellow-500 rounded-full animate-spin mx-auto" />
+                        <div className="col-span-full py-32 text-center">
+                            <div className="w-12 h-12 border-4 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mx-auto" />
                         </div>
                     ) : filteredLeads.length > 0 ? filteredLeads.map((lead) => (
-                        <div key={lead._id} className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4">
+                        <div key={lead._id} className="bg-slate-900/40 border border-slate-800/60 rounded-[2.5rem] p-8 space-y-6 shadow-2xl relative overflow-hidden group">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center font-black text-slate-900 text-xl shadow-lg">
+                                        {lead.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <p className="font-black text-white text-xl">{lead.name}</p>
+                                        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{new Date(lead.createdAt).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
                                 <button 
                                     onClick={() => handleDelete(lead._id)}
-                                    className="p-2 text-slate-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                                    className="p-3 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-2xl transition-all"
                                 >
-                                    <Trash2 size={18} />
+                                    <Trash2 size={20} />
                                 </button>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 bg-slate-800 rounded-2xl flex items-center justify-center font-bold text-yellow-500 text-lg">
-                                    {lead.name.charAt(0)}
+                            <div className="p-6 bg-slate-950/40 rounded-3xl border border-slate-800/50">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <MessageSquare size={14} className="text-yellow-500" />
+                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</span>
                                 </div>
-                                <div>
-                                    <p className="font-bold text-white text-lg">{lead.name}</p>
-                                    <p className="text-xs text-slate-500">{new Date(lead.createdAt).toLocaleDateString()}</p>
-                                </div>
+                                <p className="text-slate-300 italic text-sm leading-relaxed">"{lead.message || 'No message provided'}"</p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800/50">
-                                <div className="space-y-1">
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Service</p>
-                                    <p className="text-sm text-slate-300 font-medium">{lead.service}</p>
+                            <div className="flex flex-wrap items-center justify-between gap-6 pt-2">
+                                <div className="space-y-2">
+                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Contact</span>
+                                    <a href={`tel:${lead.phone}`} className="flex items-center gap-2.5 text-white font-black text-sm">
+                                        <div className="p-1.5 bg-slate-800 rounded-lg">
+                                            <Phone size={14} className="text-yellow-500" />
+                                        </div>
+                                        {lead.phone}
+                                    </a>
                                 </div>
-                                <div className="space-y-1">
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Phone</p>
-                                    <div className="flex items-center gap-2 text-slate-400">
-                                        <Phone size={12} />
-                                        <span className="text-sm font-bold">{lead.phone}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="pt-4 border-t border-slate-800/50 flex items-center justify-between">
-                                <div className="space-y-1">
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Status</p>
-                                    <div className="relative">
-                                        <select 
-                                            value={lead.status}
-                                            onChange={(e) => handleStatusUpdate(lead._id, e.target.value)}
-                                            className={`text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded-full outline-none appearance-none border transition-all cursor-pointer ${
-                                                lead.status === 'new' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                                                lead.status === 'contacted' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' :
-                                                lead.status === 'converted' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                                                'bg-slate-700/50 text-slate-400 border-slate-600'
-                                            }`}
-                                        >
-                                            <option value="new">New</option>
-                                            <option value="contacted">Contacted</option>
-                                            <option value="converted">Converted</option>
-                                            <option value="closed">Closed</option>
-                                        </select>
-                                    </div>
+                                <div className="space-y-2">
+                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Status</span>
+                                    <select 
+                                        value={lead.status}
+                                        onChange={(e) => handleStatusUpdate(lead._id, e.target.value)}
+                                        className={`text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl outline-none appearance-none border transition-all ${
+                                            lead.status === 'new' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                                            lead.status === 'contacted' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' :
+                                            lead.status === 'converted' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                                            'bg-slate-800 text-slate-500 border-slate-700'
+                                        }`}
+                                    >
+                                        <option value="new">New</option>
+                                        <option value="contacted">Contacted</option>
+                                        <option value="converted">Converted</option>
+                                        <option value="closed">Closed</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     )) : (
-                        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-12 text-center text-slate-500">
+                        <div className="col-span-full py-32 text-center text-slate-500 font-bold bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800">
                             No leads found matching your search.
                         </div>
                     )}
@@ -228,3 +249,4 @@ const AdminLeads = () => {
 };
 
 export default AdminLeads;
+

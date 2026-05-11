@@ -54,9 +54,9 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-primary font-bold uppercase tracking-wider text-sm mb-4 block">Who We Are</span>
-              <h2 className="text-4xl font-heading font-extrabold text-slate-900 mb-6">About Solynora Solar Solutions</h2>
+              <h2 className="text-4xl font-heading font-extrabold text-slate-900 mb-6">Why Choose Solynora?</h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-8">
-                Solynora Solar Solutions excels in the field of solar installation, providing expert services tailored to meet diverse energy needs. We are dedicated to bringing clean, reliable, and affordable energy to homes and businesses across Rajasthan.
+               We provide world-class solar solutions that are efficient, sustainable, and designed to last for decades.
               </p>
               <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">Our Mission</h3>

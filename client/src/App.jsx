@@ -13,6 +13,8 @@ import TermsOfService from './pages/TermsOfService';
 import CookiePolicy from './pages/CookiePolicy';
 import FAQ from './pages/FAQ';
 import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
+
 
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -57,6 +59,8 @@ function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+
           <Route path="/faq" element={<FAQ />} />
 
           {/* Admin Routes */}

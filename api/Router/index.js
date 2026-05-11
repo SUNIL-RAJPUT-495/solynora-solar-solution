@@ -24,7 +24,7 @@ router.post('/auth/seed', async (req, res) => {
         const hashedPassword = await bcrypt.hash('admin123', 10);
         const admin = new Admin({
             name: 'Solynora Admin',
-            email: 'admin@solynora.com',
+            email: "admin@solynora.com",
             password: hashedPassword
         });
         await admin.save();

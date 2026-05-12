@@ -10,9 +10,9 @@ const Home = () => {
       {/* Features Section */}
       <section className="py-24 px-6 container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4">Why Choose Solynora?</h2>
+          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 mb-4">What is Solynora ?</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            We provide world-class solar solutions that are efficient, sustainable, and designed to last for decades.
+            Solynora Solar Solutions is a Rajasthan-based solar energy company that provides rooftop solar installation, maintenance, and renewable energy solutions for residential and commercial customers. The company appears to operate mainly around Dausa, Rajasthan.
           </p>
         </div>
 

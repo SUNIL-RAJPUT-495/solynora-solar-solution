@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LeadModal from './components/LeadModal';
@@ -14,6 +15,7 @@ import CookiePolicy from './pages/CookiePolicy';
 import FAQ from './pages/FAQ';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 
 // Admin Pages
@@ -42,9 +44,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
+      <ScrollToTop />
+      <Toaster position="top-center" reverseOrder={false} />
       {!isAdminPath && <Navbar />}
       {!isAdminPath && <LeadModal />}
-      
+
       {/* Page Content */}
       <main className="flex-grow">
         <Routes>

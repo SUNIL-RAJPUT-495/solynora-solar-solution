@@ -4,9 +4,9 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105"
-        style={{ 
+        style={{
           backgroundImage: `url('/solar_hero_premium_1777009573420.png')`,
         }}
       >
@@ -23,17 +23,17 @@ const HeroSection = () => {
             Experience the next generation of solar technology. Save up to 90% on electricity bills while saving the planet.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button 
+            <button
               onClick={() => window.dispatchEvent(new CustomEvent('openLeadModal'))}
               className="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-600 transition-all shadow-xl hover:shadow-primary/20 active:scale-95"
             >
               Get a Free Quote
             </button>
-            <button onClick={() => {navigate("/about")}} className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all active:scale-95">
+            <button onClick={() => { navigate("/about") }} className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all active:scale-95">
               Learn More
             </button>
           </div>
-          
+
           {/* Stats or Trust Markers */}
           <div className="mt-12 mb-12 flex gap-8 items-center border-t border-white/10 pt-8">
             <div>

@@ -36,10 +36,10 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar bar */}
-      <nav className="fixed top-0 left-0 right-0 z-[200] bg-white px-6 py-4 flex justify-between items-center shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-[200] bg-slate-900 px-6 py-4 flex justify-between items-center shadow-sm">
         {/* Logo */}
         <Link to="/" onClick={closeMenu} className="flex items-center hover:opacity-80 transition-opacity">
-          <img src={logo} alt="Solynora Logo" className="h-11 w-auto object-contain" />
+          <img src={logo} alt="Solynora Logo" className="h-14 w-auto object-contain" />
         </Link>
 
         {/* Desktop Menu */}
@@ -48,14 +48,12 @@ const Navbar = () => {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className={`font-medium transition-all duration-300 relative group ${
-                  isActive(link.path) ? 'text-primary' : 'text-slate-600 hover:text-primary'
-                }`}
+                className={`font-medium transition-all duration-300 relative group ${isActive(link.path) ? 'text-primary' : 'text-slate-300 hover:text-primary'
+                  }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                  isActive(link.path) ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(link.path) ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
               </Link>
             </li>
           ))}
@@ -69,11 +67,11 @@ const Navbar = () => {
           </li>
           <li className="flex gap-4 items-center ml-2">
             <a href="https://www.instagram.com/solynora/" target="_blank" rel="noopener noreferrer"
-              className="text-slate-600 hover:text-[#E4405F] transition-colors" aria-label="Instagram">
+              className="text-slate-300 hover:text-[#E4405F] transition-colors" aria-label="Instagram">
               <InstagramIcon />
             </a>
             <a href="https://www.linkedin.com/in/solynora-solar-solutions-a566a1390/" target="_blank" rel="noopener noreferrer"
-              className="text-slate-600 hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
+              className="text-slate-300 hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
               <LinkedInIcon />
             </a>
           </li>
@@ -82,7 +80,7 @@ const Navbar = () => {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-slate-800 text-3xl font-bold hover:text-primary transition-colors focus:outline-none"
+          className="md:hidden text-white text-3xl font-bold hover:text-primary transition-colors focus:outline-none"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? '✕' : '☰'}
@@ -91,16 +89,15 @@ const Navbar = () => {
 
       {/* Mobile Menu Fullscreen Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[150] bg-white flex flex-col items-center justify-center">
+        <div className="fixed inset-0 z-[150] bg-slate-900 flex flex-col items-center justify-center">
           <ul className="flex flex-col gap-8 items-center list-none text-center px-6">
             {navLinks.map((link) => (
               <li key={link.path}>
                 <Link
                   to={link.path}
                   onClick={closeMenu}
-                  className={`text-2xl font-bold transition-all ${
-                    isActive(link.path) ? 'text-primary' : 'text-slate-700 hover:text-primary'
-                  }`}
+                  className={`text-2xl font-bold transition-all ${isActive(link.path) ? 'text-primary' : 'text-slate-300 hover:text-primary'
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -117,11 +114,11 @@ const Navbar = () => {
             </li>
             <li className="flex gap-6 items-center mt-2">
               <a href="https://www.instagram.com/solynora/" target="_blank" rel="noopener noreferrer"
-                className="text-slate-500 hover:text-[#E4405F] transition-colors" aria-label="Instagram">
+                className="text-slate-400 hover:text-[#E4405F] transition-colors" aria-label="Instagram">
                 <InstagramIcon />
               </a>
               <a href="https://www.linkedin.com/in/solynora-solar-solutions-a566a1390/" target="_blank" rel="noopener noreferrer"
-                className="text-slate-500 hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
+                className="text-slate-400 hover:text-[#0A66C2] transition-colors" aria-label="LinkedIn">
                 <LinkedInIcon size={22} />
               </a>
             </li>

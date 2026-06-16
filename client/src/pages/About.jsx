@@ -3,10 +3,11 @@ const About = () => {
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
       {/* Header */}
-      <section className="bg-slate-900 py-20 text-center">
-        <h1 className="text-5xl font-heading font-extrabold text-white mb-4">About Solynora</h1>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-          Leading the transition to a sustainable world through innovative solar technology.
+      <section className="bg-slate-100 py-24 text-center relative overflow-hidden border-b border-slate-200">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <h1 className="text-5xl font-heading font-extrabold text-slate-900 mb-6 tracking-tight relative z-10">Our Services</h1>
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto relative z-10 leading-relaxed">
+          Expert solar solutions for your needs. Our team of dedicated professionals is here to assist you with personalized energy solutions that fit your lifestyle. Whether you are looking to reduce your energy bill, minimize your carbon footprint, or invest in sustainable energy, we offer a range of services tailored to meet your specific requirements. Let us help you harness the power of the sun for a greener tomorrow.
         </p>
       </section>
 
@@ -25,9 +26,9 @@ const About = () => {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl" />
-            <img 
-              src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=1974&auto=format&fit=crop" 
-              alt="Mission" 
+            <img
+              src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=1974&auto=format&fit=crop"
+              alt="Mission"
               className="relative rounded-3xl shadow-2xl w-full h-[400px] object-cover"
             />
           </div>

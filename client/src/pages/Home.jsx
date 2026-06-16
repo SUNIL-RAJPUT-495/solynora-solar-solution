@@ -56,7 +56,7 @@ const Home = () => {
               <span className="text-primary font-bold uppercase tracking-wider text-sm mb-4 block">Who We Are</span>
               <h2 className="text-4xl font-heading font-extrabold text-slate-900 mb-6">Why Choose Solynora?</h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-8">
-               We provide world-class solar solutions that are efficient, sustainable, and designed to last for decades.
+                We provide world-class solar solutions that are efficient, sustainable, and designed to last for decades.
               </p>
               <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">Our Mission</h3>
@@ -67,9 +67,9 @@ const Home = () => {
             </div>
             <div className="relative">
               <div className="aspect-square bg-slate-100 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-                <img 
-                  src="/solynora_team.png" 
-                  alt="Solynora Team" 
+                <img
+                  src="/solynora_team.png"
+                  alt="Solynora Team"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -95,9 +95,9 @@ const Home = () => {
           {/* Maintenance Service */}
           <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden group hover:border-primary/20 transition-all">
             <div className="aspect-video rounded-2xl overflow-hidden mb-8">
-              <img 
-                src="/solar_maintenance_dausa_1777017026374.png" 
-                alt="Solar Maintenance" 
+              <img
+                src="/solar_maintenance_dausa_1777017026374.png"
+                alt="Solar Maintenance"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -117,9 +117,9 @@ const Home = () => {
           {/* Installation Service */}
           <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden group hover:border-primary/20 transition-all">
             <div className="aspect-video rounded-2xl overflow-hidden mb-8">
-              <img 
-                src="/solar_installation_dausa_1777017049528.png" 
-                alt="Solar Installation" 
+              <img
+                src="/solar_installation_dausa_1777017049528.png"
+                alt="Solar Installation"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -161,9 +161,9 @@ const Home = () => {
               </div>
             </div>
             <div className="lg:w-1/2 w-full h-full min-h-[400px]">
-              <img 
-                src="/solar_home.png" 
-                alt="Solar Powered Home" 
+              <img
+                src="/solar_home.png"
+                alt="Solar Powered Home"
                 className="w-full h-full object-cover"
               />
             </div>

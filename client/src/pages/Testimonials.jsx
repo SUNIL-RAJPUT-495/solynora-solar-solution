@@ -1,3 +1,9 @@
+import React from 'react';
+import rahulImg from '../assets/rahul_sharma.png';
+import priyaImg from '../assets/priya_verma.png';
+import amitImg from '../assets/amit_patel.png';
+import snehaImg from '../assets/sneha_gupta.png';
+
 const Testimonials = () => {
   const reviews = [
     {
@@ -5,41 +11,43 @@ const Testimonials = () => {
       role: 'Homeowner',
       text: 'Switching to Solynora was the best decision for our home. Our electricity bill dropped by 85% in the first month!',
       rating: 5,
-      image: 'https://i.pravatar.cc/150?u=rahul'
+      image: rahulImg
     },
     {
       name: 'Priya Verma',
       role: 'Business Owner',
       text: 'The commercial installation was seamless. Their team handled everything from permits to final setup with extreme professionalism.',
       rating: 5,
-      image: 'https://i.pravatar.cc/150?u=priya'
+      image: priyaImg
     },
     {
       name: 'Amit Patel',
       role: 'Tech Enthusiast',
       text: 'I love the monitoring app! I can see exactly how much energy I am generating and saving in real-time. Highly recommended.',
       rating: 5,
-      image: 'https://i.pravatar.cc/150?u=amit'
+      image: amitImg
     },
     {
       name: 'Sneha Gupta',
       role: 'Sustainability Advocate',
       text: 'SolarTech is not just a company, they are partners in a greener future. Their support and maintenance are top-notch.',
       rating: 4,
-      image: 'https://i.pravatar.cc/150?u=sneha'
+      image: snehaImg
     }
   ];
 
   return (
     <div className="pt-32 min-h-screen bg-slate-50">
       {/* Header */}
-      <section className="bg-slate-900 py-24 text-center relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-10 left-10 text-9xl text-white opacity-20">❝</div>
+      <section className="bg-slate-100 py-24 text-center relative overflow-hidden border-b border-slate-200">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]">
+          <div className="absolute top-10 left-10 text-9xl text-slate-900 opacity-20">❝</div>
         </div>
-        <h1 className="text-5xl md:text-6xl font-heading font-extrabold text-white mb-6 relative z-10 italic">What Our Clients Say</h1>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto relative z-10 font-medium">
-          Real stories from homeowners and businesses who have joined the solar revolution.
+        <h1 className="text-5xl md:text-7xl font-heading font-black text-slate-900 mb-8 tracking-tight relative z-10">
+          Client <span className="text-primary">Stories</span>
+        </h1>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed relative z-10">
+          Hear from our satisfied customers who have already made the switch to clean, renewable solar energy.
         </p>
       </section>
 

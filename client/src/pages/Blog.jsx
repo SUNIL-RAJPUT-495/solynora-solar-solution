@@ -23,8 +23,8 @@ const Blog = () => {
     fetchBlogs();
   }, []);
 
-  const filteredBlogs = blogs.filter(blog => 
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBlogs = (blogs || []).filter(blog =>
+    blog?.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const featuredBlog = filteredBlogs.length > 0 ? filteredBlogs[0] : null;
@@ -33,22 +33,20 @@ const Blog = () => {
   return (
     <div className=" pt-10 min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="bg-slate-900 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900 to-slate-900" />
+      <section className="bg-slate-100 py-24 relative overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-[0.03]" />
         
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <span className="inline-block px-4 py-1.5 bg-yellow-500/10 text-yellow-500 rounded-full text-sm font-bold tracking-widest uppercase mb-6 border border-yellow-500/20">
+          <span className="inline-block px-4 py-1.5 bg-yellow-500/10 text-yellow-600 rounded-full text-sm font-bold tracking-widest uppercase mb-6 border border-yellow-500/20">
             Insights & News
           </span>
-          <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-8 tracking-tight">
-            Our <span className="text-yellow-500">Solar</span> Blog
+          <h1 className="text-5xl md:text-7xl font-heading font-black text-slate-900 mb-8 tracking-tight">
+            Our <span className="text-yellow-600">Solar</span> Blog
           </h1>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-12">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-12">
             Stay updated with the latest trends, expert tips, and breakthrough news in the world of solar energy and sustainable living.
           </p>
-
-          </div>
+        </div>
       </section>
 
       <section className="py-24 container mx-auto px-6">
@@ -69,9 +67,9 @@ const Blog = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-[4rem] p-8 md:p-12 shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
                   <div className="aspect-[16/10] lg:aspect-square overflow-hidden rounded-[3rem] relative shadow-2xl">
                     {featuredBlog.image ? (
-                      <img 
-                        src={featuredBlog.image} 
-                        alt={featuredBlog.title} 
+                      <img
+                        src={featuredBlog.image}
+                        alt={featuredBlog.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     ) : (
@@ -82,7 +80,7 @@ const Blog = () => {
                       <span className="px-6 py-2 bg-yellow-500 text-slate-900 rounded-full text-sm font-bold shadow-xl">Featured Post</span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-8">
                     <div className="flex items-center gap-4 text-slate-400 font-bold text-sm tracking-widest uppercase">
                       <Calendar size={18} className="text-yellow-500" />
@@ -90,16 +88,16 @@ const Blog = () => {
                       <span className="w-1.5 h-1.5 bg-slate-200 rounded-full" />
                       <span>5 min read</span>
                     </div>
-                    
+
                     <h2 className="text-4xl md:text-5xl font-heading font-black text-slate-900 leading-tight group-hover:text-yellow-600 transition-colors">
                       {featuredBlog.title}
                     </h2>
-                    
+
                     <p className="text-xl text-slate-500 leading-relaxed line-clamp-3">
                       {featuredBlog.content}
                     </p>
-                    
-                    <Link 
+
+                    <Link
                       to={`/blog/${featuredBlog._id}`}
                       className="inline-flex items-center gap-3 bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:bg-yellow-500 hover:text-slate-900 transition-all shadow-xl shadow-slate-900/10 active:scale-[0.98]"
                     >
@@ -117,9 +115,9 @@ const Blog = () => {
                 <div key={blog._id} className="group flex flex-col bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-xl shadow-slate-200/30 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 hover:-translate-y-2">
                   <div className="aspect-[16/10] overflow-hidden relative">
                     {blog.image ? (
-                      <img 
-                        src={blog.image} 
-                        alt={blog.title} 
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : (
@@ -142,7 +140,7 @@ const Blog = () => {
                       {blog.content}
                     </p>
 
-                    <Link 
+                    <Link
                       to={`/blog/${blog._id}`}
                       className="inline-flex items-center gap-2 text-slate-900 font-bold group/btn hover:text-yellow-600 transition-colors"
                     >
@@ -162,7 +160,7 @@ const Blog = () => {
               )}
             </div>
 
-            
+
           </div>
         )}
       </section>

@@ -11,31 +11,31 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-900 text-slate-400 pt-24 pb-12 border-t border-white/5 mt-auto">
+    <footer className="bg-black text-slate-400 pt-24 pb-12 border-t border-white/5 mt-auto">
       <div className="container mx-auto px-6">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Brand & Description */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <img src={logo} alt="Solynora Logo" className="h-12 w-auto object-contain brightness-0 invert" />
+              <img src={logo} alt="Solynora Logo" className="h-16 w-auto object-contain" />
             </Link>
             <p className="text-slate-400 leading-relaxed max-w-xs">
               We are dedicated to providing sustainable energy solutions that empower homes and businesses while protecting our planet for future generations.
             </p>
             <div className="flex gap-4">
-              <a 
-                href="https://www.instagram.com/solynora/" 
-                target="_blank" 
+              <a
+                href="https://www.instagram.com/solynora/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E4405F] hover:text-white transition-all shadow-lg"
                 aria-label="Instagram"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              <a 
-                href="https://www.linkedin.com/in/solynora-solar-solutions-a566a1390/" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/solynora-solar-solutions-a566a1390/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all shadow-lg"
                 aria-label="LinkedIn"
@@ -93,9 +93,9 @@ const Footer = () => {
                 <span className="text-xl">📞</span>
                 <p>+91-7976458341</p>
               </div>
-              <div className="flex gap-4 items-center">
-                <span className="text-xl">✉️</span>
-                <p>solynorasolarsolutions@gmail.com</p>
+              <div className="flex gap-4 items-center min-w-0 overflow-hidden">
+                <span className="text-xl flex-shrink-0">✉️</span>
+                <p className="break-all">solynorasolarsolutions@gmail.com</p>
               </div>
             </div>
           </div>
@@ -104,9 +104,9 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} Solar Solutions. All rights reserved. 
+            &copy; {new Date().getFullYear()} Solar Solutions. All rights reserved.
           </p>
-         
+
         </div>
       </div>
     </footer>

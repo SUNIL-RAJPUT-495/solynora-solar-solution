@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { baseURL } from '../common/SummerAPI';
 import { Languages } from 'lucide-react';
 
@@ -65,13 +66,17 @@ const LeadModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.phone.length !== 10) {
+      toast.error(language === 'en' ? 'Please enter exactly 10 digits for your mobile number.' : 'कृपया 10 अंकों का मान्य मोबाइल नंबर दर्ज करें।');
+      return;
+    }
     setLoading(true);
     try {
       await axios.post(`${baseURL}/api/leads`, { ...formData, language });
-      alert(t.successMsg);
+      toast.success(t.successMsg);
       setIsVisible(false);
     } catch (err) {
-      alert(t.errorMsg);
+      toast.error(t.errorMsg);
     } finally {
       setLoading(false);
     }
@@ -123,10 +128,14 @@ const LeadModal = () => {
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2">{t.phoneLabel}</label>
               <input 
-                type="tel" 
+                type="text" 
                 required
+                maxLength="10"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setFormData({ ...formData, phone: val });
+                }}
                 placeholder={t.phonePlaceholder} 
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all text-sm font-medium"
               />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
+import toast from 'react-hot-toast';
 import { MessageSquare, Mail, Search, Trash2, Eye, CheckCircle, Clock, Filter, ArrowRight, User, Hash, Sparkles, X, Phone } from 'lucide-react';
 
 const AdminInquiries = () => {
@@ -29,10 +30,12 @@ const AdminInquiries = () => {
     const handleStatusUpdate = async (id, newStatus) => {
         try {
             await AxiosAdmin.put(`/api/inquiries/${id}`, { status: newStatus });
+            toast.success("Inquiry status updated successfully");
             fetchInquiries();
             if (selectedInquiry?._id === id) setSelectedInquiry({ ...selectedInquiry, status: newStatus });
         } catch (err) {
             console.error("Error updating status:", err);
+            toast.error("Failed to update status");
         }
     };
 
@@ -40,14 +43,16 @@ const AdminInquiries = () => {
         if (!window.confirm("Are you sure you want to delete this inquiry?")) return;
         try {
             await AxiosAdmin.delete(`/api/inquiries/${id}`);
+            toast.success("Inquiry deleted successfully");
             fetchInquiries();
             setIsModalOpen(false);
         } catch (err) {
             console.error("Error deleting inquiry:", err);
+            toast.error("Failed to delete inquiry");
         }
     };
 
-    const filteredInquiries = inquiries.filter(inquiry => {
+    const filteredInquiries = (inquiries || []).filter(inquiry => {
         const matchesSearch = inquiry.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                              inquiry.subject.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesFilter = filterStatus === 'all' || inquiry.status === filterStatus;
@@ -106,7 +111,7 @@ const AdminInquiries = () => {
                 <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2rem] overflow-hidden shadow-2xl relative">
                     <div className="overflow-x-auto no-scrollbar">
                         <table className="w-full text-left min-w-[1000px] border-separate border-spacing-0">
-                            <thead className="sticky top-[73px] z-10 bg-slate-900/95 backdrop-blur-md">
+                            <thead className="bg-slate-900/95 backdrop-blur-md">
                                 <tr className="bg-slate-950/40 border-b border-slate-800/50">
                                     <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Sender</th>
                                     <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Subject</th>

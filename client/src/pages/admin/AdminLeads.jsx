@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
+import toast from 'react-hot-toast';
 import { Users, Search, Filter, Trash2, MessageSquare, Phone, Calendar, ChevronRight, MoreHorizontal, User } from 'lucide-react';
 
 const AdminLeads = () => {
@@ -26,9 +27,11 @@ const AdminLeads = () => {
     const handleStatusUpdate = async (id, newStatus) => {
         try {
             await AxiosAdmin.put(`/api/leads/${id}`, { status: newStatus });
+            toast.success("Lead status updated successfully");
             fetchLeads();
         } catch (err) {
             console.error("Error updating status:", err);
+            toast.error("Failed to update status");
         }
     };
 
@@ -36,13 +39,15 @@ const AdminLeads = () => {
         if (!window.confirm("Are you sure you want to delete this lead?")) return;
         try {
             await AxiosAdmin.delete(`/api/leads/${id}`);
+            toast.success("Lead deleted successfully");
             fetchLeads();
         } catch (err) {
             console.error("Error deleting lead:", err);
+            toast.error("Failed to delete lead");
         }
     };
 
-    const filteredLeads = leads.filter(lead => 
+    const filteredLeads = (leads || []).filter(lead => 
         lead.name.toLowerCase().includes(search.toLowerCase()) || 
         lead.phone.includes(search) ||
         (lead.message && lead.message.toLowerCase().includes(search.toLowerCase()))
@@ -78,11 +83,11 @@ const AdminLeads = () => {
                     </div>
                 </div>
 
-                {/* Desktop Table View */}
-                <div className="hidden lg:block bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.5rem] overflow-hidden shadow-2xl">
+                {/* Table View (Responsive) */}
+                <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2.5rem] overflow-hidden shadow-2xl">
                     <div className="overflow-x-auto no-scrollbar">
                         <table className="w-full text-left min-w-[1100px] border-separate border-spacing-0">
-                            <thead className="sticky top-[73px] z-10 bg-slate-900/95 backdrop-blur-md">
+                            <thead className="bg-slate-900/95 backdrop-blur-md">
                                 <tr className="bg-slate-950/40 border-b border-slate-800/50">
                                     <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Client</th>
                                     <th className="px-10 py-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</th>
@@ -125,7 +130,7 @@ const AdminLeads = () => {
                                         </td>
                                         <td className="px-10 py-8">
                                             <div className="max-w-xs xl:max-w-md">
-                                                <p className="text-sm text-slate-300 font-medium leading-relaxed line-clamp-2 italic">
+                                                <p className="text-sm text-slate-300 font-medium leading-relaxed italic">
                                                     "{lead.message || 'No message provided'}"
                                                 </p>
                                             </div>
@@ -178,82 +183,6 @@ const AdminLeads = () => {
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-                {/* Mobile/Tablet Card View */}
-                <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {loading ? (
-                        <div className="col-span-full py-32 text-center">
-                            <div className="w-12 h-12 border-4 border-yellow-500/10 border-t-yellow-500 rounded-full animate-spin mx-auto" />
-                        </div>
-                    ) : filteredLeads.length > 0 ? filteredLeads.map((lead) => (
-                        <div key={lead._id} className="bg-slate-900/40 border border-slate-800/60 rounded-[2.5rem] p-8 space-y-6 shadow-2xl relative overflow-hidden group">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center font-black text-slate-900 text-xl shadow-lg">
-                                        {lead.name.charAt(0)}
-                                    </div>
-                                    <div>
-                                        <div className="flex items-center gap-2">
-                                            <p className="font-black text-white text-xl">{lead.name}</p>
-                                            {lead.language === 'hi' && (
-                                                <span className="px-2 py-0.5 bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-orange-500/20">Hindi</span>
-                                            )}
-                                        </div>
-                                        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{new Date(lead.createdAt).toLocaleDateString()}</span>
-                                    </div>
-                                </div>
-                                <button 
-                                    onClick={() => handleDelete(lead._id)}
-                                    className="p-3 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-2xl transition-all"
-                                >
-                                    <Trash2 size={20} />
-                                </button>
-                            </div>
-
-                            <div className="p-6 bg-slate-950/40 rounded-3xl border border-slate-800/50">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <MessageSquare size={14} className="text-yellow-500" />
-                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</span>
-                                </div>
-                                <p className="text-slate-300 italic text-sm leading-relaxed">"{lead.message || 'No message provided'}"</p>
-                            </div>
-
-                            <div className="flex flex-wrap items-center justify-between gap-6 pt-2">
-                                <div className="space-y-2">
-                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Contact</span>
-                                    <a href={`tel:${lead.phone}`} className="flex items-center gap-2.5 text-white font-black text-sm">
-                                        <div className="p-1.5 bg-slate-800 rounded-lg">
-                                            <Phone size={14} className="text-yellow-500" />
-                                        </div>
-                                        {lead.phone}
-                                    </a>
-                                </div>
-                                <div className="space-y-2">
-                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Status</span>
-                                    <select 
-                                        value={lead.status}
-                                        onChange={(e) => handleStatusUpdate(lead._id, e.target.value)}
-                                        className={`text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl outline-none appearance-none border transition-all ${
-                                            lead.status === 'new' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
-                                            lead.status === 'contacted' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' :
-                                            lead.status === 'converted' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                                            'bg-slate-800 text-slate-500 border-slate-700'
-                                        }`}
-                                    >
-                                        <option value="new">New</option>
-                                        <option value="contacted">Contacted</option>
-                                        <option value="converted">Converted</option>
-                                        <option value="closed">Closed</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    )) : (
-                        <div className="col-span-full py-32 text-center text-slate-500 font-bold bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800">
-                            No leads found matching your search.
-                        </div>
-                    )}
                 </div>
             </div>
         </AdminLayout>

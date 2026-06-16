@@ -2,7 +2,11 @@ import mongoose from 'mongoose';
 
 const leadSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: { 
+        type: String, 
+        required: true,
+        match: [/^\d{10}$/, 'Phone number must be exactly 10 digits']
+    },
     message: { type: String, required: true },
     language: { type: String, default: 'en' },
     status: { 

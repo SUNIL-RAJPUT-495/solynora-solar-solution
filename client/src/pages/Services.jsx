@@ -2,10 +2,10 @@ const Services = () => {
   return (
     <div className="pt-24 min-h-screen bg-slate-50">
       {/* Header */}
-      <section className="bg-slate-900 py-20 text-center relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <h1 className="text-5xl font-heading font-extrabold text-white mb-4 relative z-10">Our Services</h1>
-        <p className="text-lg  text-slate-400 max-w-2xl mx-auto relative z-10">
+      <section className="bg-slate-100 py-24 text-center relative overflow-hidden border-b border-slate-200">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <h1 className="text-5xl font-heading font-extrabold text-slate-900 mb-6 tracking-tight relative z-10">Our Services</h1>
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto relative z-10 leading-relaxed">
           Expert solar solutions for your needs. Our team of dedicated professionals is here to assist you with personalized energy solutions that fit your lifestyle. Whether you are looking to reduce your energy bill, minimize your carbon footprint, or invest in sustainable energy, we offer a range of services tailored to meet your specific requirements. Let us help you harness the power of the sun for a greener tomorrow.
         </p>
       </section>
@@ -93,16 +93,16 @@ const Services = () => {
             {/* Top 2 Images Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="overflow-hidden rounded-[2.5rem] shadow-xl group">
-                <img 
-                  src="https://images.unsplash.com/photo-1509391141513-394dd9625c0e?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Solar Installation 1" 
+                <img
+                  src="https://images.unsplash.com/photo-1509391141513-394dd9625c0e?q=80&w=2070&auto=format&fit=crop"
+                  alt="Solar Installation 1"
                   className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
               <div className="overflow-hidden rounded-[2.5rem] shadow-xl group">
-                <img 
-                  src="/solar_hero_premium_1777009573420.png" 
-                  alt="Solar Installation 2" 
+                <img
+                  src="/solar_hero_premium_1777009573420.png"
+                  alt="Solar Installation 2"
                   className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
@@ -124,9 +124,9 @@ const Services = () => {
               </div>
               <div className="lg:w-1/2 relative">
                 <div className="absolute -inset-4 bg-primary/10 rounded-[2.5rem] blur-2xl" />
-                <img 
-                  src="/solar_mechanics_working_1777011237096.png" 
-                  alt="Mechanics at Work" 
+                <img
+                  src="/solar_mechanics_working_1777011237096.png"
+                  alt="Mechanics at Work"
                   className="relative rounded-[2.5rem] shadow-2xl w-full object-cover aspect-video"
                 />
                 <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20 shadow-lg">

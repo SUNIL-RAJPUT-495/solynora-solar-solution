@@ -1,4 +1,5 @@
-export const baseURL = import.meta.env.VITE_API_URL || "https://solynora-solar-solution-jidi.vercel.app";
+// Automatically use current origin in production (relative path), or localhost/vercel during development
+export const baseURL = "http://api.solynora.com";
 
 const SummaryApi = {
     // Admin & Auth

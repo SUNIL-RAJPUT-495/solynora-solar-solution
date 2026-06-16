@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { baseURL } from '../../common/SummerAPI';
 import { Sun, Lock, Mail, Loader2 } from 'lucide-react';
 
@@ -20,10 +21,13 @@ const AdminLogin = () => {
             const response = await axios.post(`${baseURL}/api/auth/login`, { email, password }, { withCredentials: true });
             if (response.data.success) {
                 localStorage.setItem('admin_token', response.data.token);
+                toast.success('Login successful');
                 navigate('/admin/dashboard');
             }
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed. Please try again.');
+            const errorMsg = err.response?.data?.message || 'Login failed. Please try again.';
+            setError(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setLoading(false);
         }

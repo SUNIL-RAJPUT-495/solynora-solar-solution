@@ -65,7 +65,7 @@ const AdminDashboard = () => {
                                 System Online
                             </span>
                         </div>
-                        <h1 className="text-4xl font-black text-white tracking-tighter">Command Center</h1>
+                        <h1 className="text-3xl md:text-4xl font-black text-white tracking-tighter">Command Center</h1>
                         <p className="text-slate-400 text-lg font-medium">Real-time intelligence for Solynora Solar operations.</p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -76,30 +76,30 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     {statCards.map((card, idx) => (
                         <div 
                             key={idx} 
                             onClick={() => navigate(card.path)}
-                            className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 p-10 rounded-[3rem] relative overflow-hidden group hover:border-yellow-500/40 transition-all duration-500 cursor-pointer shadow-2xl"
+                            className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 p-4 md:p-10 rounded-[1.5rem] md:rounded-[3rem] relative overflow-hidden group hover:border-yellow-500/40 transition-all duration-500 cursor-pointer shadow-2xl"
                         >
                             <div className={`absolute top-0 right-0 w-40 h-40 ${card.color}/10 blur-[80px] rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-700`} />
                             
-                            <div className="flex items-center justify-between mb-8 relative z-10">
-                                <div className={`p-5 rounded-[1.5rem] ${card.color}/20 text-white shadow-2xl ring-1 ring-white/10`}>
+                            <div className="flex items-start md:items-center justify-between mb-4 md:mb-8 relative z-10 flex-col md:flex-row gap-3 md:gap-0">
+                                <div className={`p-3 md:p-5 rounded-xl md:rounded-[1.5rem] ${card.color}/20 text-white shadow-2xl ring-1 ring-white/10 w-fit`}>
                                     {card.icon}
                                 </div>
-                                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950/60 rounded-full text-[10px] font-black text-green-400 border border-green-500/10">
-                                    <TrendingUp size={12} />
+                                <div className="flex items-center gap-1.5 px-2 md:px-3 py-1 md:py-1.5 bg-slate-950/60 rounded-full text-[8px] md:text-[10px] font-black text-green-400 border border-green-500/10 w-fit">
+                                    <TrendingUp size={10} className="md:w-3 md:h-3" />
                                     {card.trend}
                                 </div>
                             </div>
 
                             <div className="relative z-10">
-                                <h3 className="text-slate-500 font-black text-xs uppercase tracking-widest mb-2">{card.title}</h3>
-                                <div className="flex items-baseline gap-3">
-                                    <span className="text-5xl font-black text-white tracking-tighter">{card.value}</span>
-                                    <span className="text-slate-600 text-sm font-bold uppercase tracking-widest">Lifetime</span>
+                                <h3 className="text-slate-500 font-black text-[9px] md:text-xs uppercase tracking-widest mb-1 md:mb-2 line-clamp-1">{card.title}</h3>
+                                <div className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-3">
+                                    <span className="text-2xl md:text-5xl font-black text-white tracking-tighter">{card.value}</span>
+                                    <span className="text-slate-600 text-[9px] md:text-sm font-bold uppercase tracking-widest">Lifetime</span>
                                 </div>
                             </div>
                         </div>
@@ -109,9 +109,9 @@ const AdminDashboard = () => {
                 {/* Recent Activity Grid */}
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
                     {/* Recent Leads */}
-                    <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[3.5rem] overflow-hidden shadow-2xl">
-                        <div className="p-10 border-b border-slate-800/60 flex items-center justify-between bg-slate-950/40">
-                            <h2 className="text-xl font-black flex items-center gap-3 text-white tracking-tight">
+                    <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl">
+                        <div className="p-6 md:p-10 border-b border-slate-800/60 flex items-center justify-between bg-slate-950/40">
+                            <h2 className="text-lg md:text-xl font-black flex items-center gap-3 text-white tracking-tight">
                                 <Users className="text-yellow-500" size={24} />
                                 New Arrivals
                             </h2>
@@ -125,27 +125,28 @@ const AdminDashboard = () => {
                         </div>
                         <div className="divide-y divide-slate-800/40">
                             {recentLeads.length > 0 ? recentLeads.map((lead) => (
-                                <div key={lead._id} className="p-8 flex items-center justify-between hover:bg-white/[0.02] transition-colors group">
-                                    <div className="flex items-center gap-5">
-                                        <div className="w-14 h-14 bg-slate-950/60 rounded-2xl flex items-center justify-center text-xl font-black text-blue-400 border border-white/5 shadow-inner">
+                                <div key={lead._id} className="p-5 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group">
+                                    <div className="flex items-center gap-4 md:gap-5">
+                                        <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-slate-950/60 rounded-2xl flex items-center justify-center text-xl font-black text-blue-400 border border-white/5 shadow-inner">
                                             {lead.name.charAt(0)}
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <p className="font-black text-white text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                <p className="font-black text-white text-base md:text-lg group-hover:text-yellow-500 transition-colors">{lead.name}</p>
+                                                <span className="px-1.5 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-blue-500/20">Lead</span>
                                                 {lead.language === 'hi' && (
                                                     <span className="px-1.5 py-0.5 bg-orange-500/10 text-orange-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-orange-500/20">HI</span>
                                                 )}
                                             </div>
-                                            <p className="text-sm text-slate-500 font-medium line-clamp-1 italic">"{lead.message || 'No message'}"</p>
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium line-clamp-1 italic">"{lead.message || 'No message'}"</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-8">
-                                        <div className="hidden md:block text-right">
+                                    <div className="flex items-center justify-between md:justify-end gap-4 md:gap-8 ml-16 md:ml-0">
+                                        <div className="text-left md:text-right">
                                             <p className="text-sm font-black text-white">{lead.phone}</p>
                                             <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-1">{new Date(lead.createdAt).toLocaleDateString()}</p>
                                         </div>
-                                        <div className={`w-3 h-3 rounded-full ${lead.status === 'new' ? 'bg-blue-500 animate-pulse shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)]'}`} />
+                                        <div className={`w-3 h-3 rounded-full shrink-0 ${lead.status === 'new' ? 'bg-blue-500 animate-pulse shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)]'}`} />
                                     </div>
                                 </div>
                             )) : (
@@ -155,9 +156,9 @@ const AdminDashboard = () => {
                     </div>
 
                     {/* Recent Inquiries */}
-                    <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[3.5rem] overflow-hidden shadow-2xl">
-                        <div className="p-10 border-b border-slate-800/60 flex items-center justify-between bg-slate-950/40">
-                            <h2 className="text-xl font-black flex items-center gap-3 text-white tracking-tight">
+                    <div className="bg-slate-900/40 backdrop-blur-3xl border border-slate-800/60 rounded-[2rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl">
+                        <div className="p-6 md:p-10 border-b border-slate-800/60 flex items-center justify-between bg-slate-950/40">
+                            <h2 className="text-lg md:text-xl font-black flex items-center gap-3 text-white tracking-tight">
                                 <MessageSquare className="text-purple-500" size={24} />
                                 Intelligence Feed
                             </h2>
@@ -171,26 +172,31 @@ const AdminDashboard = () => {
                         </div>
                         <div className="divide-y divide-slate-800/40">
                             {recentInquiries.length > 0 ? recentInquiries.map((inquiry) => (
-                                <div key={inquiry._id} className="p-8 flex items-center justify-between hover:bg-white/[0.02] transition-colors group">
-                                    <div className="flex items-center gap-5">
-                                        <div className="w-14 h-14 bg-slate-950/60 rounded-2xl flex items-center justify-center text-xl font-black text-purple-400 border border-white/5 shadow-inner">
+                                <div key={inquiry._id} className="p-5 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group">
+                                    <div className="flex items-center gap-4 md:gap-5">
+                                        <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-slate-950/60 rounded-2xl flex items-center justify-center text-xl font-black text-purple-400 border border-white/5 shadow-inner">
                                             {inquiry.name.charAt(0)}
                                         </div>
                                         <div>
-                                            <p className="font-black text-white text-lg group-hover:text-yellow-500 transition-colors">{inquiry.name}</p>
-                                            <p className="text-sm text-slate-500 font-medium line-clamp-1">{inquiry.subject}</p>
+                                            <div className="flex items-center gap-2">
+                                                <p className="font-black text-white text-base md:text-lg group-hover:text-yellow-500 transition-colors">{inquiry.name}</p>
+                                                <span className="px-1.5 py-0.5 bg-purple-500/10 text-purple-500 text-[8px] font-black uppercase tracking-widest rounded-md border border-purple-500/20">Inquiry</span>
+                                            </div>
+                                            <p className="text-xs md:text-sm text-slate-500 font-medium line-clamp-1">{inquiry.subject}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-8">
-                                        <div className="hidden md:block text-right">
+                                    <div className="flex items-center justify-between md:justify-end gap-4 md:gap-8 ml-16 md:ml-0">
+                                        <div className="text-left md:text-right">
                                             <p className="text-sm font-black text-white">{inquiry.email.split('@')[0]}...</p>
                                             <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-1">{new Date(inquiry.createdAt).toLocaleDateString()}</p>
                                         </div>
-                                        {inquiry.status === 'new' ? (
-                                            <AlertCircle size={22} className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]" />
-                                        ) : (
-                                            <CheckCircle2 size={22} className="text-green-500 opacity-50" />
-                                        )}
+                                        <div className="shrink-0">
+                                            {inquiry.status === 'new' ? (
+                                                <AlertCircle size={22} className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]" />
+                                            ) : (
+                                                <CheckCircle2 size={22} className="text-green-500 opacity-50" />
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             )) : (

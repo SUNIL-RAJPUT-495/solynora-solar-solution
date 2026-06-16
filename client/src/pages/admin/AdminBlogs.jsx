@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AxiosAdmin from '../../utils/axiosAdmin';
 import AdminLayout from '../../components/admin/AdminLayout';
+import toast from 'react-hot-toast';
 import { FileText, Plus, Search, Trash2, Edit, X, Image as ImageIcon, Loader2 } from 'lucide-react';
 
 const AdminBlogs = () => {
@@ -43,8 +44,10 @@ const AdminBlogs = () => {
         try {
             if (editingBlog) {
                 await AxiosAdmin.put(`/api/blogs/${editingBlog._id}`, formData);
+                toast.success("Blog post updated successfully");
             } else {
                 await AxiosAdmin.post(`/api/blogs`, formData);
+                toast.success("Blog post created successfully");
             }
             setIsModalOpen(false);
             setEditingBlog(null);
@@ -52,6 +55,7 @@ const AdminBlogs = () => {
             fetchBlogs();
         } catch (err) {
             console.error(err);
+            toast.error("Failed to save blog post");
         } finally {
             setSubmitting(false);
         }
@@ -61,9 +65,11 @@ const AdminBlogs = () => {
         if (!window.confirm("Delete this blog post?")) return;
         try {
             await AxiosAdmin.delete(`/api/blogs/${id}`);
+            toast.success("Blog post deleted successfully");
             fetchBlogs();
         } catch (err) {
             console.error(err);
+            toast.error("Failed to delete blog post");
         }
     };
 

@@ -24,9 +24,9 @@ const FAQ = () => {
 
   return (
     <div className="pt-32 min-h-screen bg-slate-50">
-      <section className="bg-slate-900 py-24 text-center">
-        <h1 className="text-5xl font-heading font-extrabold text-white mb-6">Frequently Asked Questions</h1>
-        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+      <section className="bg-slate-100 py-24 text-center border-b border-slate-200">
+        <h1 className="text-5xl font-heading font-extrabold text-slate-900 mb-6 tracking-tight">Frequently Asked Questions</h1>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
           Everything you need to know about switching to solar energy.
         </p>
       </section>

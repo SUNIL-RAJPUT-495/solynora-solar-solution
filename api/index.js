@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import connectDB from "./config/db.js";
 import router from './Router/index.js';
+import path from 'path';
 
 dotenv.config();
 
@@ -17,8 +18,8 @@ app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
       "http://localhost:5173", 
-      "https://solynora-solar-solution.vercel.app",
-      "https://solynora-solar-solution-jidi.vercel.app"
+      "https://solynora.com",
+      "https://www.solynora.com"
     ];
     if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".vercel.app")) {
       callback(null, true);
@@ -39,9 +40,22 @@ connectDB();
 // Routes
 app.use('/api', router);
 
-app.get('/', (req, res) => {
-  res.send('Solynora Solar API is running');
-});
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from the React app
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+
+  // The "catchall" handler: for any request that doesn't
+  // match one above, send back React's index.html file.
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('Solynora Solar API is running');
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {

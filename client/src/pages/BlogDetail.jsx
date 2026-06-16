@@ -20,7 +20,7 @@ const BlogDetail = () => {
 
                 // Fetch recent blogs for the sidebar
                 const recentResponse = await axios.get(`${baseURL}/api/blogs`);
-                const filteredRecent = recentResponse.data.blogs
+                const filteredRecent = (recentResponse.data.blogs || [])
                     .filter(b => b._id !== id)
                     .slice(0, 3);
                 setRecentBlogs(filteredRecent);
